@@ -87,7 +87,7 @@ function revealCard(event) {    // this time, the click event is going to be the
                 hideACard(cardsPicked[1]);
                 cardsPicked = [];
             }
-            window.setTimeout(hidePickedCards, 100);
+            window.setTimeout(hidePickedCards, 1000);
         }
     }
 }
