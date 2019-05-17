@@ -1,19 +1,17 @@
 var arrOfImages = ["csharplogo.png", "csslogo.png", "htmllogo.png", "javalogo.png", "jslogo.png", "pythonlogo.png"];
-
+// Fill these functions out using your code!
 function doubleImages(arr) {
-    for (var i = arr.length - 1; i >= 0; i--) {
-        arr.push(arr[i]);
-    }
+        for (var i = arr.length - 1; i >= 0; i = i - 1) {                
+        arr.push(arr[i]);        
+    }        
     return arr;
 }
-console.log(doubleImages(arrOfImages));
-
 function displayCards(arr) {
     // instead of a list, we're going to grab the empty div so we can add to it later
     var container = document.getElementById("container");
     
     // for each image in our array
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i = i + 1) {
         // create a new HTML image element
         var newImgElement = document.createElement("img");
         // set the src of the img tag to be the name of the file
@@ -26,9 +24,8 @@ function displayCards(arr) {
         container.appendChild(newImgElement);
     }
 }
-
 function shuffleCards(arr) {
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i = i + 1) {
         // get 2 random index values
         var idx1 = Math.floor(Math.random()*arr.length);
         var idx2 = Math.floor(Math.random()*arr.length);
@@ -39,38 +36,19 @@ function shuffleCards(arr) {
         arr[idx2] = temp;
     }
     return arr;
-}
-    
-// let's shuffle the cards BEFORE we display them!
-shuffleCards(arrOfImages);
-
-displayCards(arrOfImages);    // call on the function
-
+}   
 function hideACard(idx) {
     // get the image with the specified idx/id
     var specificCard = document.getElementById(idx);
     // set the image's source to the question mark
     specificCard.src = "static/images/questionmark.png";
 }
-    
-// call on the hideACard function for each card in our array of images
-for (var i = 0; i < arrOfImages.length; i++) {
-    // let's call on the hideACard function we just made
-    hideACard(i);
-}
-
-var cardsPicked = [];    // outside the function, we'll keep track of which cards have been picked
-
-function revealCard(event) {    // this time, the click event is going to be the input
-    // the event actually contains the element (and all its attributes)
-    // we'll use it to get the id of the element that was clicked
+function revealCard(event) {
     var clickedImageId = event.target.id;
         
-    // grab the element that was clicked on
     var clickedImage = document.getElementById(clickedImageId); 
-    // update the image's source to show a different picture
     clickedImage.src = "static/images/" + arrOfImages[clickedImageId];
-
+    
     // add the clicked image to our array
     cardsPicked.push(clickedImageId);
     
@@ -91,6 +69,19 @@ function revealCard(event) {    // this time, the click event is going to be the
         }
     }
 }
+
+// Game logic!
+console.log(doubleImages(arrOfImages));
+shuffleCards(arrOfImages);
+displayCards(arrOfImages);
+
+// call on the hideACard function for each card in our array of images
+for (var i = 0; i < arrOfImages.length; i++) {
+    // let's call on the hideACard function we just made
+    hideACard(i);
+}
+
+var cardsPicked = [];    // outside the function, we'll keep track of which cards have been picked
 
 var cards = document.getElementsByClassName("card");    // grab all the cards
 for (var i = 0; i < cards.length; i++) {
